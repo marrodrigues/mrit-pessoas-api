@@ -1,9 +1,0 @@
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/application/api/PessoasApi.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/infrastructure/configuration/SecurityConfiguration.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/Application.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/application/model/Pessoa.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/infrastructure/configuration/SwaggerUiConfiguration.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/application/model/enumeration/SexoEnumeration.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/application/api/PessoasApiController.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/application/api/HomeApiController.java
-/home/mario/Documents/Pessoal/conhecimento-adquirido/desafio/Pessoas/src/main/java/br/com/mrit/pessoasapi/infrastructure/configuration/SwaggerDocumentationConfig.java
