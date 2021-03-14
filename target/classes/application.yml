@@ -1,0 +1,41 @@
+# Endpoints
+endpoints:
+  restart:
+    enabled: true
+
+# Server
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+    min-response-size: 10240
+
+# Spring
+spring:
+  datasource:
+    url: ${DATABASE_STRING_CONNECTION:jdbc:mysql://localhost:3306/federation_customer_order_enrichment?useTimezone=true&serverTimezone=GMT-3}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:root}
+    hikari:
+      connection-init-sql: SELECT 1
+      connection-test-query: SELECT 1
+  jpa:
+    show-sql: ${DEBUG_SQL:true}
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 200
+        order_inserts: true
+        order_updates: true
+        enable_lazy_load_no_trans: true
+
+# SpringFox
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: '/api-docs'
