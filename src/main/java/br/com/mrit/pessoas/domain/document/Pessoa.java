@@ -1,5 +1,6 @@
 package br.com.mrit.pessoas.domain.document;
 
+import br.com.mrit.pessoas.application.util.ApplicationUtil;
 import br.com.mrit.pessoas.domain.document.enumeration.SexoEnumeration;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -50,4 +51,8 @@ public class Pessoa {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(example = "2021-02-14 16:21:10", notes="Data da ultima atualização do cadastro de pessoa.")
     private LocalDateTime dataAtualizacao;
+
+    public String getCpf(){
+        return ApplicationUtil.applyMaskCPF(this.cpf);
+    }
 }

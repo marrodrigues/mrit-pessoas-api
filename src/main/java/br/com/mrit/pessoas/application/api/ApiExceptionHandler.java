@@ -1,4 +1,4 @@
-package br.com.mrit.pessoas.application.api.advice;
+package br.com.mrit.pessoas.application.api;
 
 import br.com.mrit.pessoas.application.exception.ApiException;
 import br.com.mrit.pessoas.application.model.ErrorResponse;
