@@ -13,10 +13,5 @@ class SourceApiControllerSpec extends Specification {
             def response = controller.getSource()
         then:
             response.getStatusCode() == HttpStatus.OK
-            response.getBody().getBackend() == backend
-            response.getBody().getFrontend() == frontend
-        where:
-            backend = "https://github.com/marrodrigues/mrit-pessoas-api"
-            frontend = "https://github.com/marrodrigues/mrit-pessoas"
     }
 }

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/api/v1")
 public interface SourceApi {
 
-    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Busca informações dos repositorios dos códigos",
             description = "Busca informações dos repositorios dos códigos",

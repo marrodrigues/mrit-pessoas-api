@@ -18,7 +18,6 @@ public class SourceApiController implements SourceApi {
     @Value("${application.source.front-end}")
     private String FRONT_END;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Source> getSource() {
         return ResponseEntity.ok(Source.builder().backend(BACK_END).frontend(FRONT_END).build());
     }
