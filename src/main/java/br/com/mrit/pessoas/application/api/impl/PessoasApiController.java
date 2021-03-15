@@ -26,7 +26,7 @@ public class PessoasApiController implements PessoasApi {
 
     private final PessoaService service;
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity createPessoa(@Valid @RequestBody PessoaModel payload) {
         ResponseEntity result;
         try {
@@ -49,7 +49,7 @@ public class PessoasApiController implements PessoasApi {
         return result;
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity deletePessoa(@PathVariable("id") String id) {
         try {
             service.deletePessoa(id);
@@ -65,7 +65,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getPessoaById(@PathVariable("id") String id) {
         try {
             return ResponseEntity.ok(service.getPessoaById(id));
@@ -80,7 +80,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getPessoas() {
         try {
             return ResponseEntity.ok(service.getPessoas());
@@ -95,7 +95,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity updatePessoa(@PathVariable("id") String id, @Valid @RequestBody PessoaModel payload) {
         try {
             service.updatePessoa(id, payload);
