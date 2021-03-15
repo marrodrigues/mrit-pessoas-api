@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class PessoasApiController implements PessoasApi {
 
     private final PessoaService service;
