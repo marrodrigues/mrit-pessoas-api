@@ -31,10 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http = http.cors().and().csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/pessoas/**", "/source/**").authenticated()
-                .antMatchers(HttpMethod.POST,"/pessoas/**").authenticated()
-                .antMatchers(HttpMethod.PUT,"/pessoas/**").authenticated()
-                .antMatchers(HttpMethod.DELETE,"/pessoas/**").authenticated()
+                .antMatchers("/api/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/api/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"/api/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/api/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .httpBasic()

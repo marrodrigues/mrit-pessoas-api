@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(tags = "Pessoas")
+@RequestMapping("/api")
 public interface PessoasApi {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,7 +32,7 @@ public interface PessoasApi {
         @ApiResponse(responseCode = "201", description = "Pessoa criada", content = @Content(schema = @Schema(implementation = Pessoa.class))),
         @ApiResponse(responseCode = "400", description = "Erro nos dados enviados para cadastro"),
         @ApiResponse(responseCode = "409", description = "Conflito de cadastro") })
-    @PostMapping(value = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/v1/pessoas", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Pessoa> createPessoa(@Parameter(in = ParameterIn.DEFAULT,
                                                         description = "Objeto com informações da pessoa a ser adicionada.",
                                                         required=true,
@@ -45,7 +46,7 @@ public interface PessoasApi {
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "204", description = "Exclusão concluida com sucesso"),
         @ApiResponse(responseCode = "404", description = "Usuário não encontrado") })
-    @DeleteMapping(value = "/pessoas/{id}")
+    @DeleteMapping(value = "/v1/pessoas/{id}")
     ResponseEntity deletePessoa(@Parameter(in = ParameterIn.PATH,
                                                 description = "Identificador da pessoa",
                                                 required=true,
@@ -61,7 +62,7 @@ public interface PessoasApi {
         @ApiResponse(responseCode = "200",
                 description = "Resultado da busca com sucesso.",
                 content = @Content(schema = @Schema(implementation = Pessoa.class))) })
-    @GetMapping(value = "/pessoas/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/v1/pessoas/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Pessoa> getPessoaById(@Parameter(in = ParameterIn.PATH,
                                                             description = "Identificador da pessoa",
                                                             required=true,
@@ -77,7 +78,7 @@ public interface PessoasApi {
         @ApiResponse(responseCode = "200",
                 description = "Resultado da busca com sucesso.",
                 content = @Content(array = @ArraySchema(schema = @Schema(implementation = Pessoa.class)))) })
-    @GetMapping(value = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/v1/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Pessoa>> getPessoas() throws ApiException;
 
 
@@ -89,7 +90,7 @@ public interface PessoasApi {
         @ApiResponse(responseCode = "204", description = "Atualização concluida com sucesso"),
         @ApiResponse(responseCode = "400", description = "Erro nos dados enviados para cadastro"),
         @ApiResponse(responseCode = "404", description = "Usuário não encontrado") })
-    @PutMapping(value = "/pessoas/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/v1/pessoas/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity updatePessoa(@Parameter(in = ParameterIn.PATH,
                                             description = "Identificador da pessoa",
                                             required=true,
