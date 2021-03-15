@@ -7,6 +7,7 @@ import br.com.mrit.pessoas.application.model.PessoaModel;
 import br.com.mrit.pessoas.application.service.PessoaService;
 import br.com.mrit.pessoas.domain.document.Pessoa;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,17 +26,19 @@ public class PessoasApiController implements PessoasApi {
 
     private final PessoaService service;
 
+    @CrossOrigin(origins = "*")
     public ResponseEntity createPessoa(@Valid @RequestBody PessoaModel payload) {
+        ResponseEntity result;
         try {
             Pessoa pessoa = service.createPessoa(payload);
-            return ResponseEntity.created(ServletUriComponentsBuilder
-                                                .fromCurrentRequest()
-                                                .path("/{id}")
-                                                .buildAndExpand(pessoa.getId())
-                                                .toUri())
-                                    .body(pessoa);
+            result = ResponseEntity.created(ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(pessoa.getId())
+                    .toUri())
+                    .body(pessoa);
         } catch (ApiException e) {
-            return ResponseEntity.status(e.getStatusCode())
+            result = ResponseEntity.status(e.getStatusCode())
                     .body(ErrorResponse
                             .builder()
                             .code(e.getCode())
@@ -43,8 +46,10 @@ public class PessoasApiController implements PessoasApi {
                             .message(e.getMessage())
                             .build());
         }
+        return result;
     }
 
+    @CrossOrigin(origins = "*")
     public ResponseEntity deletePessoa(@PathVariable("id") String id) {
         try {
             service.deletePessoa(id);
@@ -60,6 +65,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
+    @CrossOrigin(origins = "*")
     public ResponseEntity getPessoaById(@PathVariable("id") String id) {
         try {
             return ResponseEntity.ok(service.getPessoaById(id));
@@ -74,6 +80,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
+    @CrossOrigin(origins = "*")
     public ResponseEntity getPessoas() {
         try {
             return ResponseEntity.ok(service.getPessoas());
@@ -88,6 +95,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
+    @CrossOrigin(origins = "*")
     public ResponseEntity updatePessoa(@PathVariable("id") String id, @Valid @RequestBody PessoaModel payload) {
         try {
             service.updatePessoa(id, payload);
