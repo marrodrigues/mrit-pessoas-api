@@ -1,9 +1,10 @@
 package br.com.mrit.pessoas.application.service.impl;
 
 import br.com.mrit.pessoas.application.exception.ApiException;
+import br.com.mrit.pessoas.application.model.PessoaModel;
 import br.com.mrit.pessoas.application.service.PessoaService;
 import br.com.mrit.pessoas.application.util.ApplicationUtil;
-import br.com.mrit.pessoas.domain.entity.Pessoa;
+import br.com.mrit.pessoas.domain.document.Pessoa;
 import br.com.mrit.pessoas.domain.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,27 +27,35 @@ public class PessoaServiceImpl implements PessoaService {
     private final PessoaRepository repository;
 
     @Override
-    public Pessoa createPessoa(Pessoa pessoa) throws ApiException {
-        validaPessoa(pessoa);
+    public Pessoa createPessoa(PessoaModel payload) throws ApiException {
+        validaPessoa(payload);
+        repository.existsByCpf(payload.getCpf())
+                    .orElseThrow(() -> ApiException.conflict("Conflito no cadastro",
+                                                            "Erro ao cadastrado pessoa, o cpf %s já foi cadastrado."));
+
+        Pessoa pessoa = modelMapper.map(payload, Pessoa.class);
+        pessoa.setCpf(pessoa.getCpf().replaceAll("[^0-9]", ""));
+
         return repository.save(pessoa);
     }
 
     @Override
-    public void updatePessoa(Long id, Pessoa payload) throws ApiException {
+    public void updatePessoa(String id, PessoaModel payload) throws ApiException {
         validaPessoa(payload);
 
-        if(!repository.existsById(id)){
-            throw ApiException.notFound("Cadastro não encontrado.",
-                            String.format("Não foi possivel atualizar o cadastro de pessoa, o cadastro referente ao %s não foi encontrado.", id));
-        }
+        Pessoa pessoa = repository.findById(id).orElseThrow(() -> ApiException.notFound("Cadastro não encontrado.",
+                String.format("Não foi possivel atualizar o cadastro de pessoa, o cadastro referente ao id %s não foi encontrado.", id)));
 
         Pessoa updatePessoa = modelMapper.map(payload, Pessoa.class);
-        updatePessoa.setId(id);
+
+        updatePessoa.setId(pessoa.getId());
+        updatePessoa.setCpf(updatePessoa.getCpf().replaceAll("[^0-9]", ""));
+        updatePessoa.setDataCadastro(pessoa.getDataCadastro());
 
         repository.save(updatePessoa);
     }
 
-    private void validaPessoa(Pessoa pessoa) throws ApiException {
+    private void validaPessoa(PessoaModel pessoa) throws ApiException {
         if(Strings.isNotBlank(pessoa.getEmail())) {
             try {
                 new InternetAddress(pessoa.getEmail()).validate();
@@ -55,27 +64,27 @@ public class PessoaServiceImpl implements PessoaService {
             }
         }
 
-        if(ApplicationUtil.isValidCPF(pessoa.getCpf())) {
-            throw ApiException.badRequest("CPF inválido.", "O campo cpf deve ter um cpf válido.");
+        if(!ApplicationUtil.isValidCPF(pessoa.getCpf().replaceAll("[^0-9]", ""))) {
+            throw ApiException.badRequest("CPF inválido.", "O campo cpf deve ter um valor válido.");
         }
     }
 
     @Override
-    public void deletePessoa(Long id) throws ApiException {
+    public void deletePessoa(String id) throws ApiException {
         if(!repository.existsById(id)){
             throw ApiException.notFound("Cadastro não encontrado.",
-                    String.format("Não foi possivel deletar o cadastro de pessoa, o cadastro referente ao %s não foi encontrado.", id));
+                    String.format("Não foi possivel deletar o cadastro de pessoa, o cadastro referente ao id %s não foi encontrado.", id));
         }
 
         repository.deleteById(id);
     }
 
     @Override
-    public Pessoa getPessoaById(Long id) throws ApiException {
+    public Pessoa getPessoaById(String id) throws ApiException {
         return repository.findById(id)
                         .orElseThrow(() ->
                                 ApiException.notFound("Cadastro não encontrado",
-                                        String.format("O cadastro referente ao %s não foi encontrado.", id)));
+                                        String.format("O cadastro referente ao id %s não foi encontrado.", id)));
     }
 
     @Override

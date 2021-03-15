@@ -4,6 +4,9 @@ application:
     username: ${USERNAME_AUTH:admin}
     password: ${PASSWORD_AUTH:p4sswd}
     role: ${ROLE_AUTH:ADMIN}
+  source:
+    back-end: ${REPOSITORY_URL_BACKEND:https://github.com/marrodrigues/mrit-pessoas-api}
+    front-end: ${REPOSITORY_URL_FRONTEND:https://github.com/marrodrigues/mrit-pessoas}
 
 # Endpoints
 endpoints:

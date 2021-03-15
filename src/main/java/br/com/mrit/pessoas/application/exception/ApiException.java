@@ -13,7 +13,6 @@ public class ApiException extends Exception {
     private final String reason;
     private final Integer statusCode;
 
-
     @Builder
     public ApiException(String code, String reason, String message, Integer statusCode) {
         super(message);
@@ -22,34 +21,31 @@ public class ApiException extends Exception {
         this.statusCode = statusCode;
     }
 
-
     public static ApiException badRequest(String reason, String message){
-        return new ApiException1(HttpStatus.BAD_REQUEST.getReasonPhrase(),reason, message,HttpStatus.BAD_REQUEST.value());
+        return new ApiException(HttpStatus.BAD_REQUEST.getReasonPhrase(),reason, message,HttpStatus.BAD_REQUEST.value());
     }
     public static ApiException unauthorized(String reason, String message){
-        return new ApiException1(HttpStatus.UNAUTHORIZED.getReasonPhrase(),reason, message,HttpStatus.UNAUTHORIZED.value());
+        return new ApiException(HttpStatus.UNAUTHORIZED.getReasonPhrase(),reason, message,HttpStatus.UNAUTHORIZED.value());
     }
     public static ApiException forbidden(String reason, String message){
-        return new ApiException1(HttpStatus.FORBIDDEN.getReasonPhrase(),reason, message,HttpStatus.FORBIDDEN.value());
+        return new ApiException(HttpStatus.FORBIDDEN.getReasonPhrase(),reason, message,HttpStatus.FORBIDDEN.value());
     }
     public static ApiException notFound(String reason, String message){
-        return new ApiException1(HttpStatus.NOT_FOUND.getReasonPhrase(),reason, message,HttpStatus.NOT_FOUND.value());
+        return new ApiException(HttpStatus.NOT_FOUND.getReasonPhrase(),reason, message,HttpStatus.NOT_FOUND.value());
     }
     public static ApiException conflict(String reason, String message){
-        return new ApiException1(HttpStatus.CONFLICT.getReasonPhrase(),reason, message,HttpStatus.CONFLICT.value());
+        return new ApiException(HttpStatus.CONFLICT.getReasonPhrase(),reason, message,HttpStatus.CONFLICT.value());
     }
     public static ApiException preconditionFailed(String reason, String message){
-        return new ApiException1(HttpStatus.PRECONDITION_FAILED.getReasonPhrase(),reason, message,HttpStatus.PRECONDITION_FAILED.value());
+        return new ApiException(HttpStatus.PRECONDITION_FAILED.getReasonPhrase(),reason, message,HttpStatus.PRECONDITION_FAILED.value());
     }
-
     public static ApiException internalError(String reason, String message){
-        return new ApiException1(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),reason, message,HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ApiException(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),reason, message,HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
     public static ApiException notImplemented(String reason, String message){
-        return new ApiException1(HttpStatus.NOT_IMPLEMENTED.getReasonPhrase(),reason, message,HttpStatus.NOT_IMPLEMENTED.value());
+        return new ApiException(HttpStatus.NOT_IMPLEMENTED.getReasonPhrase(),reason, message,HttpStatus.NOT_IMPLEMENTED.value());
     }
     public static ApiException serviceUnavailable(String reason, String message){
-        return new ApiException1(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase(),reason, message,HttpStatus.SERVICE_UNAVAILABLE.value());
+        return new ApiException(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase(),reason, message,HttpStatus.SERVICE_UNAVAILABLE.value());
     }
-
 }

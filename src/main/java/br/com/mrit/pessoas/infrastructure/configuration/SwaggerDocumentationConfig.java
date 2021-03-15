@@ -24,10 +24,10 @@ public class SwaggerDocumentationConfig {
     @Bean
     public Docket customImplementation(){
         return new Docket(DocumentationType.OAS_30)
-                .host("http://localhost:8080")
+                .host("http://localhost:8080/")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.ant("/pessoas/**"))
+                .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
                 .groupName("Pessoas")

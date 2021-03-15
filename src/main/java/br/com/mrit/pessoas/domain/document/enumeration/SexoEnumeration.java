@@ -1,4 +1,4 @@
-package br.com.mrit.pessoas.domain.entity.enumeration;
+package br.com.mrit.pessoas.domain.document.enumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;

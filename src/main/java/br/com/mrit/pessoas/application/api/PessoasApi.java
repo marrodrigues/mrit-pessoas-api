@@ -1,7 +1,8 @@
 package br.com.mrit.pessoas.application.api;
 
 import br.com.mrit.pessoas.application.exception.ApiException;
-import br.com.mrit.pessoas.domain.entity.Pessoa;
+import br.com.mrit.pessoas.application.model.PessoaModel;
+import br.com.mrit.pessoas.domain.document.Pessoa;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +36,7 @@ public interface PessoasApi {
                                                         description = "Objeto com informações da pessoa a ser adicionada.",
                                                         required=true,
                                                         schema=@Schema())
-                                            @RequestBody Pessoa body) throws ApiException;
+                                            @RequestBody PessoaModel body) throws ApiException;
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Exclusão de pesssoa",
@@ -49,7 +50,7 @@ public interface PessoasApi {
                                                 description = "Identificador da pessoa",
                                                 required=true,
                                                 schema=@Schema())
-                                @PathVariable("id") Long id) throws ApiException;
+                                @PathVariable("id") String id) throws ApiException;
 
 
     @ResponseStatus(HttpStatus.OK)
@@ -65,7 +66,7 @@ public interface PessoasApi {
                                                             description = "Identificador da pessoa",
                                                             required=true,
                                                             schema=@Schema())
-                                            @PathVariable("id") Long id) throws ApiException;
+                                            @PathVariable("id") String id) throws ApiException;
 
 
     @ResponseStatus(HttpStatus.OK)
@@ -89,11 +90,14 @@ public interface PessoasApi {
         @ApiResponse(responseCode = "400", description = "Erro nos dados enviados para cadastro"),
         @ApiResponse(responseCode = "404", description = "Usuário não encontrado") })
     @PutMapping(value = "/pessoas/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity updatePessoa(@Parameter(in = ParameterIn.PATH, description = "Identificador da pessoa", required=true, schema=@Schema())
-                                    @PathVariable("id") Long id,
+    ResponseEntity updatePessoa(@Parameter(in = ParameterIn.PATH,
+                                            description = "Identificador da pessoa",
+                                            required=true,
+                                            schema=@Schema())
+                                    @PathVariable("id") String id,
                                 @Parameter(in = ParameterIn.DEFAULT,
                                             required=true,
                                             description = "Objeto com informações da pessoa a ser atualizada.",
                                             schema=@Schema())
-                                   @RequestBody Pessoa body) throws ApiException;
+                                   @RequestBody PessoaModel body) throws ApiException;
 }
