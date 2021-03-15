@@ -1,6 +1,7 @@
 package br.com.mrit.pessoas.application.api;
 
-import br.com.mrit.pessoas.application.model.Pessoa;
+import br.com.mrit.pessoas.application.exception.ApiException;
+import br.com.mrit.pessoas.domain.entity.Pessoa;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ public interface PessoasApi {
                                                         description = "Objeto com informações da pessoa a ser adicionada.",
                                                         required=true,
                                                         schema=@Schema())
-                                            @RequestBody Pessoa body);
+                                            @RequestBody Pessoa body) throws ApiException;
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Exclusão de pesssoa",
@@ -48,7 +49,7 @@ public interface PessoasApi {
                                                 description = "Identificador da pessoa",
                                                 required=true,
                                                 schema=@Schema())
-                                @PathVariable("id") Long id);
+                                @PathVariable("id") Long id) throws ApiException;
 
 
     @ResponseStatus(HttpStatus.OK)
@@ -64,7 +65,7 @@ public interface PessoasApi {
                                                             description = "Identificador da pessoa",
                                                             required=true,
                                                             schema=@Schema())
-                                            @PathVariable("id") Long id);
+                                            @PathVariable("id") Long id) throws ApiException;
 
 
     @ResponseStatus(HttpStatus.OK)
@@ -76,7 +77,7 @@ public interface PessoasApi {
                 description = "Resultado da busca com sucesso.",
                 content = @Content(array = @ArraySchema(schema = @Schema(implementation = Pessoa.class)))) })
     @GetMapping(value = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<Pessoa>> getPessoas();
+    ResponseEntity<List<Pessoa>> getPessoas() throws ApiException;
 
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -94,5 +95,5 @@ public interface PessoasApi {
                                             required=true,
                                             description = "Objeto com informações da pessoa a ser atualizada.",
                                             schema=@Schema())
-                                   @RequestBody Pessoa body);
+                                   @RequestBody Pessoa body) throws ApiException;
 }

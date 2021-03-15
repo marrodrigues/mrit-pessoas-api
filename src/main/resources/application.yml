@@ -1,3 +1,10 @@
+# Application
+application:
+  auth:
+    username: ${USERNAME_AUTH:admin}
+    password: ${PASSWORD_AUTH:p4sswd}
+    role: ${ROLE_AUTH:ADMIN}
+
 # Endpoints
 endpoints:
   restart:
@@ -16,22 +23,9 @@ server:
 
 # Spring
 spring:
-  datasource:
-    url: ${DATABASE_STRING_CONNECTION:jdbc:mysql://localhost:3306/federation_customer_order_enrichment?useTimezone=true&serverTimezone=GMT-3}
-    username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:root}
-    hikari:
-      connection-init-sql: SELECT 1
-      connection-test-query: SELECT 1
-  jpa:
-    show-sql: ${DEBUG_SQL:true}
-    properties:
-      hibernate:
-        jdbc:
-          batch_size: 200
-        order_inserts: true
-        order_updates: true
-        enable_lazy_load_no_trans: true
+  data:
+    mongodb:
+      uri: ${MONGO_STRING_CONNECTION:mongodb+srv://desafio-pessoa:p4sswd@cluster0.ijyny.mongodb.net/desafio-pessoa?retryWrites=true&w=majority}
 
 # SpringFox
 springfox:

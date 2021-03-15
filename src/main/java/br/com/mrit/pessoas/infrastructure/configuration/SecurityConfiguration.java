@@ -1,6 +1,7 @@
 package br.com.mrit.pessoas.infrastructure.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,12 +12,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Value("${application.auth.username}")
+    private String USERNAME;
+    @Value("${application.auth.password}")
+    private String PASSWORD;
+    @Value("${application.auth.role}")
+    private String ROLE;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("{noop}p4sswd")
-                .authorities("ADMIN");
+                .withUser(USERNAME)
+                .password(String.format("{noop}%s", PASSWORD))
+                .authorities(ROLE);
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
