@@ -24,6 +24,7 @@ import java.util.List;
 @RequestMapping("/api")
 public interface PessoasApi {
 
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Adiciona pesssoa",
             description = "Adiciona um cadastro de pessoa no sistema.",
@@ -39,6 +40,7 @@ public interface PessoasApi {
                                                         schema=@Schema())
                                             @RequestBody PessoaModel body) throws ApiException;
 
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Exclusão de pesssoa",
             description = "Exclusão de um cadastro de pessoa no sistema.",
@@ -53,7 +55,7 @@ public interface PessoasApi {
                                                 schema=@Schema())
                                 @PathVariable("id") String id) throws ApiException;
 
-
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Busca de pessoa cadastrada",
             description = "Busca de uma pessoa especifica cadastrada no sistema ",
@@ -69,7 +71,7 @@ public interface PessoasApi {
                                                             schema=@Schema())
                                             @PathVariable("id") String id) throws ApiException;
 
-
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Lista pessoas cadastradas",
             description = "Busca de todas as pessoas cadastradas no sistema ",
@@ -81,7 +83,7 @@ public interface PessoasApi {
     @GetMapping(value = "/v1/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Pessoa>> getPessoas() throws ApiException;
 
-
+    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Atualização de um cadastro de pesssoa",
             description = "Atualização de um cadastro de pessoa no sistema.",

@@ -14,17 +14,4 @@ public class ApplicationConfiguration {
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         return modelMapper;
     }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedHeaders("*")
-                        .allowedMethods("*")
-                        .allowedOrigins("*");
-            }
-        };
-    }
 }
