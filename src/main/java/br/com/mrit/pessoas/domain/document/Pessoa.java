@@ -35,6 +35,7 @@ public class Pessoa {
     private SexoEnumeration sexo;
     @ApiModelProperty(example = "user.test@gmail.com", notes="E-mail da pessoa.")
     private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(example = "1990-10-09", required = true, notes="Data de nascimento da pessoa.")
     private LocalDate dataNascimento;
     @ApiModelProperty(example = "Rio de janeiro", notes="Cidade onde a pessoa nasceu.")

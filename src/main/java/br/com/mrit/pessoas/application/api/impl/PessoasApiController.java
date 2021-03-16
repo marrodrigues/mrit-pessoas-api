@@ -7,10 +7,7 @@ import br.com.mrit.pessoas.application.model.PessoaModel;
 import br.com.mrit.pessoas.application.service.PessoaService;
 import br.com.mrit.pessoas.domain.document.Pessoa;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,7 +88,7 @@ public class PessoasApiController implements PessoasApi {
         }
     }
 
-    public ResponseEntity updatePessoa(@PathVariable("id") String id, @Valid @RequestBody PessoaModel payload) {
+    public ResponseEntity updatePessoa(@PathVariable("id") String id, @Valid @RequestBody PessoaModel payload) throws URISyntaxException{
         try {
             service.updatePessoa(id, payload);
             return ResponseEntity.noContent().location(new URI(ServletUriComponentsBuilder.fromCurrentRequest().toUriString())).build();
@@ -103,13 +100,6 @@ public class PessoasApiController implements PessoasApi {
                             .description(e.getReason())
                             .message(e.getMessage())
                             .build());
-        } catch (URISyntaxException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse
-                                                                                    .builder()
-                                                                                    .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                                                                                    .description(e.getReason())
-                                                                                    .message(e.getMessage())
-                                                                                    .build());
         }
     }
 }

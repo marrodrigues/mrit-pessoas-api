@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Api(tags = "Pessoas")
@@ -97,5 +98,5 @@ public interface PessoasApi {
                                             required=true,
                                             description = "Objeto com informações da pessoa a ser atualizada.",
                                             schema=@Schema())
-                                   @RequestBody PessoaModel body) throws ApiException;
+                                   @RequestBody PessoaModel body) throws ApiException, URISyntaxException;
 }
